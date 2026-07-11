@@ -1,0 +1,864 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0E111B">
+  <meta name="description" content="Hitfinds Back-to-School GMV Ranking campaign for TikTok Shop creators.">
+  <title>Hitfinds — Back-to-School GMV Ranking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --canvas: #0e111b;
+      --surface-primary: #161a24;
+      --surface-secondary: #222222;
+      --surface-elevated: #292e3b;
+      --brand: #ccff00;
+      --brand-pressed: #b7e600;
+      --brand-subtle: #27330e;
+      --text-primary: #f1f5f9;
+      --text-secondary: #aeb5c2;
+      --text-tertiary: #7f8797;
+      --border-default: #303644;
+      --border-strong: #454d5e;
+      --success: #48d597;
+      --success-subtle: #153429;
+      --danger: #ff6b6b;
+      --danger-subtle: #3a2025;
+      --warning: #ffd54a;
+      --warning-subtle: #382f13;
+      --info: #68a8ff;
+      --info-subtle: #172a46;
+      --shadow-elevated: 0 16px 40px rgba(0, 0, 0, .32);
+      --radius-xs: 2px;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-full: 9999px;
+      --safe-bottom: max(16px, env(safe-area-inset-bottom));
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--canvas);
+      color: var(--text-primary);
+      font-family: Montserrat, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, a, input { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    svg { display: block; }
+    button { color: inherit; }
+    [hidden] { display: none !important; }
+
+    .skip-link {
+      position: fixed;
+      z-index: 100;
+      top: 8px;
+      left: 8px;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      background: var(--brand);
+      color: #11140b;
+      font-weight: 700;
+      transform: translateY(-160%);
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .app-shell { min-height: 100vh; }
+    .page { min-height: 100vh; }
+    .content-wrap { width: min(100%, 1200px); margin: 0 auto; }
+    .page-body { padding: 20px 16px calc(104px + var(--safe-bottom)); }
+
+    .topbar {
+      position: sticky;
+      z-index: 30;
+      top: 0;
+      height: 64px;
+      border-bottom: 1px solid rgba(48, 54, 68, .84);
+      background: rgba(14, 17, 27, .96);
+      backdrop-filter: blur(12px);
+    }
+    .topbar-inner {
+      display: flex;
+      width: min(100%, 1200px);
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 16px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand-lockup { display: inline-flex; min-height: 44px; align-items: center; gap: 8px; }
+    .brand-mark {
+      position: relative;
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--brand);
+      border-radius: var(--radius-md);
+      transform: rotate(-8deg);
+    }
+    .brand-mark::before,
+    .brand-mark::after {
+      position: absolute;
+      content: "";
+      background: var(--brand);
+    }
+    .brand-mark::before { width: 4px; height: 16px; left: 6px; top: 4px; border-radius: var(--radius-full); }
+    .brand-mark::after { width: 10px; height: 4px; left: 6px; top: 10px; border-radius: var(--radius-full); }
+    .brand-word { font-size: 18px; line-height: 24px; font-weight: 800; letter-spacing: -.5px; }
+    .brand-word span { color: var(--brand); }
+    .topbar-meta { display: flex; align-items: center; gap: 8px; }
+    .live-pill,
+    .eyebrow,
+    .chip,
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+    }
+    .live-pill { min-height: 32px; padding: 4px 12px; background: var(--brand-subtle); color: var(--brand); font-size: 10px; line-height: 15px; text-transform: uppercase; letter-spacing: .8px; }
+    .live-dot { width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--brand); box-shadow: 0 0 0 4px rgba(204,255,0,.12); }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-xl);
+      background: var(--surface-primary);
+      isolation: isolate;
+    }
+    .hero-copy { position: relative; z-index: 2; min-height: 300px; padding: 24px 20px 32px; }
+    .eyebrow { margin-bottom: 12px; color: var(--brand); font-size: 10px; line-height: 15px; text-transform: uppercase; letter-spacing: 1.2px; }
+    .hero h1 {
+      max-width: 600px;
+      margin: 0;
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: 800;
+      letter-spacing: -1.2px;
+    }
+    .hero h1 em { color: inherit; font-style: normal; }
+    .hero-subtitle { max-width: 560px; margin: 12px 0 0; color: var(--text-secondary); font-size: 14px; line-height: 20px; }
+    .campaign-window { display: flex; margin-top: 20px; align-items: center; gap: 12px; }
+    .campaign-date {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-primary);
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: 600;
+    }
+    .campaign-date svg { color: var(--brand); }
+    .hero-art { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
+    .hero-art::after {
+      position: absolute;
+      z-index: 3;
+      content: "";
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(22, 26, 36, .98), rgba(22, 26, 36, .92) 52%, rgba(22, 26, 36, .58) 80%, rgba(22, 26, 36, .36));
+    }
+    .art-grid {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      opacity: .1;
+      background-image: linear-gradient(var(--border-strong) 1px, transparent 1px), linear-gradient(90deg, var(--border-strong) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .hero-product {
+      position: absolute;
+      z-index: 1;
+      overflow: hidden;
+      opacity: .76;
+      border: 0;
+      background: transparent;
+      mask-image: radial-gradient(ellipse at center, #000 42%, transparent 74%);
+    }
+    .hero-product img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-product-a { left: -40px; bottom: -52px; width: 180px; height: 184px; transform: rotate(-6deg); }
+    .hero-product-b { left: 88px; bottom: -64px; width: 188px; height: 204px; transform: rotate(2deg); }
+    .hero-product-c { right: -40px; bottom: -44px; width: 188px; height: 192px; transform: rotate(-3deg); }
+
+    .desktop-grid { display: grid; gap: 20px; }
+    .section { margin-top: 32px; scroll-margin-top: 84px; }
+    .section-header { display: flex; margin-bottom: 16px; align-items: flex-end; justify-content: space-between; gap: 16px; }
+    .section-header h2 { margin: 0; font-size: 20px; line-height: 28px; font-weight: 700; letter-spacing: -.4px; }
+    #products-title { white-space: nowrap; }
+    .section-kicker { display: block; margin-bottom: 2px; color: var(--text-secondary); font-size: 10px; line-height: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
+    .text-link {
+      display: inline-flex;
+      min-height: 44px;
+      padding: 8px 0 8px 12px;
+      align-items: center;
+      gap: 4px;
+      color: var(--brand);
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+    }
+    .text-link:hover { color: var(--text-primary); }
+    .text-link:active { transform: translateY(1px); }
+
+    .card { border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-primary); }
+    .card-elevated { background: var(--surface-elevated); box-shadow: var(--shadow-elevated); }
+    .prize-card { overflow: hidden; }
+    .podium-header { display: flex; padding: 12px 12px 0 20px; align-items: center; justify-content: space-between; gap: 12px; }
+    .podium-header h2 { margin: 0; font-size: 18px; line-height: 24px; font-weight: 700; }
+    .podium-details {
+      display: inline-flex;
+      min-height: 44px;
+      padding: 8px;
+      border-radius: var(--radius-md);
+      align-items: center;
+      gap: 4px;
+      color: var(--brand);
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+    }
+    .podium-details:hover { background: var(--brand-subtle); color: var(--text-primary); }
+    .podium-details:active { transform: translateY(1px); }
+    .podium {
+      display: grid;
+      min-height: 200px;
+      padding: 40px 12px 0;
+      align-items: end;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .podium-place {
+      position: relative;
+      display: flex;
+      min-width: 0;
+      padding: 12px 4px;
+      border: 1px solid var(--border-default);
+      border-bottom: 0;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
+      background: var(--surface-secondary);
+      text-align: center;
+    }
+    .podium-place-1 { grid-column: 2; grid-row: 1; height: 168px; border-color: var(--brand); background: var(--brand); color: #11140a; }
+    .podium-place-2 { grid-column: 1; grid-row: 1; height: 136px; }
+    .podium-place-3 { grid-column: 3; grid-row: 1; height: 116px; }
+    .podium-crown { position: absolute; top: -28px; left: 50%; color: var(--brand); transform: translateX(-50%); }
+    .podium-medal {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-full);
+      place-items: center;
+      background: var(--surface-elevated);
+      color: var(--text-primary);
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 800;
+    }
+    .podium-place-1 .podium-medal { background: #11140a; color: var(--brand); }
+    .podium-label { margin-top: 8px; color: var(--text-secondary); font-size: 10px; line-height: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; }
+    .podium-place-1 .podium-label { color: #354100; }
+    .podium-amount { margin-top: 4px; font-size: 16px; line-height: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .podium-place-1 .podium-amount { font-size: 18px; line-height: 24px; }
+    .progress-card { padding: 20px; }
+    .progress-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .progress-head h2 { margin: 0; font-size: 18px; line-height: 24px; font-weight: 700; }
+    .status-badge { padding: 4px 8px; border-radius: var(--radius-full); background: var(--success-subtle); color: var(--success); font-size: 10px; line-height: 15px; font-weight: 700; }
+    .metric-grid { display: grid; margin-top: 16px; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .metric { min-width: 0; padding: 12px; border-radius: var(--radius-md); background: var(--surface-secondary); }
+    .metric-label { display: block; overflow: hidden; color: var(--text-secondary); font-size: 10px; line-height: 15px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+    .metric-value { display: block; margin-top: 4px; font-size: 18px; line-height: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .metric-value.brand { color: var(--brand); }
+    .metric-trend { display: block; margin-top: 2px; color: var(--success); font-size: 10px; line-height: 15px; font-weight: 600; }
+    .progress-track { height: 8px; margin-top: 16px; overflow: hidden; border-radius: var(--radius-full); background: var(--surface-secondary); }
+    .progress-fill { width: 71%; height: 100%; border-radius: inherit; background: var(--brand); }
+    .progress-copy { display: flex; margin-top: 8px; justify-content: space-between; gap: 12px; color: var(--text-secondary); font-size: 10px; line-height: 15px; }
+    .progress-copy strong { color: var(--text-primary); }
+
+    .primary-button,
+    .secondary-button,
+    .outline-button,
+    .icon-button {
+      display: inline-flex;
+      min-height: 44px;
+      border-radius: var(--radius-md);
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+      transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
+    }
+    .primary-button { width: 100%; margin-top: 16px; padding: 12px 16px; background: var(--brand); color: #11140a; }
+    .primary-button:hover { background: #ddff55; }
+    .primary-button:active { background: var(--brand-pressed); transform: translateY(1px); }
+    .secondary-button { padding: 8px 12px; border-color: var(--border-default); background: var(--surface-secondary); color: var(--text-primary); }
+    .secondary-button:hover { border-color: var(--border-strong); background: var(--surface-elevated); }
+    .secondary-button:active { transform: translateY(1px); }
+    .outline-button { padding: 8px 16px; border-color: var(--brand); background: transparent; color: var(--brand); }
+    .outline-button:hover { background: var(--brand-subtle); }
+    .icon-button { width: 44px; height: 44px; padding: 0; border-color: var(--border-default); background: var(--surface-primary); }
+    .icon-button:hover { border-color: var(--brand); color: var(--brand); }
+    .icon-button[aria-pressed="true"] { border-color: var(--brand); background: var(--brand-subtle); color: var(--brand); }
+    button:focus-visible, a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+    button:disabled { border-color: var(--border-default); background: var(--surface-secondary); color: var(--text-tertiary); cursor: not-allowed; }
+
+    .filter-row { display: flex; margin: 0 -16px 16px; padding: 0 16px 4px; gap: 8px; overflow-x: auto; scrollbar-width: none; }
+    .filter-row::-webkit-scrollbar { display: none; }
+    .chip { min-height: 40px; flex: 0 0 auto; padding: 8px 12px; border: 1px solid var(--border-default); background: var(--surface-primary); color: var(--text-secondary); cursor: pointer; font-size: 12px; line-height: 16px; }
+    .chip:hover { border-color: var(--border-strong); color: var(--text-primary); }
+    .chip[aria-selected="true"] { border-color: var(--brand); background: var(--brand-subtle); color: var(--brand); }
+
+    .video-strip { display: grid; margin: 0 -16px; padding: 0 16px 8px; grid-auto-columns: minmax(240px, 74vw); grid-auto-flow: column; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+    .video-strip::-webkit-scrollbar { display: none; }
+    .video-card { position: relative; overflow: hidden; min-height: 340px; border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-primary); scroll-snap-align: start; }
+    .video-media { position: relative; height: 220px; overflow: hidden; background: var(--surface-secondary); }
+    .video-media img { width: 100%; height: 100%; object-fit: cover; }
+    .video-media::after { position: absolute; content: ""; inset: 0; background: linear-gradient(to bottom, transparent 52%, rgba(8,10,16,.88)); }
+    .video-badge { position: absolute; z-index: 2; top: 12px; left: 12px; padding: 4px 8px; background: var(--info-subtle); color: var(--info); font-size: 10px; line-height: 15px; font-weight: 700; }
+    .play-button { position: absolute; z-index: 3; top: 50%; left: 50%; width: 48px; height: 48px; border: 1px solid rgba(255,255,255,.76); border-radius: var(--radius-full); background: rgba(14,17,27,.74); color: #fff; transform: translate(-50%, -50%); cursor: pointer; }
+    .play-button:hover { border-color: var(--brand); color: var(--brand); }
+    .creator { position: absolute; z-index: 2; right: 12px; bottom: 12px; left: 12px; display: flex; align-items: center; gap: 8px; }
+    .avatar { width: 32px; height: 32px; flex: 0 0 auto; border: 2px solid var(--brand); border-radius: var(--radius-full); object-fit: cover; }
+    .creator-name { overflow: hidden; color: #fff; font-size: 12px; line-height: 16px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+    .video-body { padding: 16px; }
+    .video-title { margin: 0; overflow: hidden; font-size: 14px; line-height: 20px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+    .video-metrics { display: grid; margin-top: 12px; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .video-stat span { display: block; color: var(--text-secondary); font-size: 10px; line-height: 15px; }
+    .video-stat strong { display: block; margin-top: 2px; font-size: 12px; line-height: 16px; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .video-stat:first-child strong { color: var(--brand); }
+
+    .product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .product-card { position: relative; overflow: hidden; min-width: 0; border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-primary); }
+    .product-media { position: relative; aspect-ratio: 1 / .96; overflow: hidden; background: var(--surface-secondary); }
+    .product-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .24s ease; }
+    .product-card:hover .product-media img { transform: scale(1.03); }
+    .badge { position: absolute; z-index: 2; top: 8px; left: 8px; min-height: 24px; padding: 2px 8px; font-size: 10px; line-height: 15px; }
+    .badge-viral { background: var(--info-subtle); color: var(--info); }
+    .badge-new { background: var(--brand-subtle); color: var(--brand); }
+    .bookmark { position: absolute; z-index: 3; top: 4px; right: 4px; border: 0; background: rgba(14,17,27,.84); }
+    .product-body { padding: 12px; }
+    .product-title { margin: 0; overflow: hidden; color: var(--text-primary); font-size: 12px; line-height: 18px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+    .price-row { display: flex; margin-top: 8px; align-items: baseline; justify-content: space-between; gap: 8px; }
+    .price { color: var(--brand); font-size: 18px; line-height: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .sold { color: var(--text-secondary); font-size: 10px; line-height: 15px; }
+    .commission { display: flex; margin-top: 8px; align-items: center; justify-content: space-between; gap: 8px; color: var(--text-secondary); font-size: 10px; line-height: 15px; }
+    .commission strong { color: var(--success); font-size: 12px; line-height: 16px; }
+    .product-action { width: 100%; margin-top: 12px; }
+
+    .state-card { display: grid; min-height: 260px; padding: 24px; border: 1px dashed var(--border-strong); border-radius: var(--radius-lg); background: var(--surface-primary); text-align: center; place-items: center; }
+    .state-card-inner { max-width: 360px; }
+    .state-icon { display: grid; width: 56px; height: 56px; margin: 0 auto 12px; border-radius: var(--radius-full); place-items: center; background: var(--surface-secondary); color: var(--text-secondary); }
+    .state-icon.error { background: var(--danger-subtle); color: var(--danger); }
+    .state-card h3 { margin: 0; font-size: 16px; line-height: 22px; font-weight: 700; }
+    .state-card p { margin: 8px 0 0; color: var(--text-secondary); font-size: 12px; line-height: 18px; }
+    .state-card .secondary-button { margin-top: 16px; }
+    .skeleton-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .skeleton { overflow: hidden; height: 300px; border: 1px solid var(--border-default); border-radius: var(--radius-lg); background: var(--surface-primary); }
+    .skeleton-media, .skeleton-line { position: relative; overflow: hidden; background: var(--surface-secondary); }
+    .skeleton-media { height: 168px; }
+    .skeleton-line { height: 12px; margin: 16px 12px 0; border-radius: var(--radius-sm); }
+    .skeleton-line.short { width: 56%; }
+    .skeleton-media::after, .skeleton-line::after { position: absolute; content: ""; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.05), transparent); animation: shimmer 1.4s infinite; transform: translateX(-100%); }
+    @keyframes shimmer { to { transform: translateX(100%); } }
+
+    .tips-card { display: flex; padding: 20px; align-items: flex-start; gap: 12px; background: var(--brand-subtle); }
+    .tips-icon { display: grid; width: 40px; height: 40px; flex: 0 0 auto; border-radius: var(--radius-full); place-items: center; background: var(--brand); color: #11140a; }
+    .tips-card h2 { margin: 0; font-size: 16px; line-height: 22px; font-weight: 700; }
+    .tips-card p { margin: 4px 0 0; color: #cbd4b2; font-size: 12px; line-height: 18px; }
+
+    .bottom-nav {
+      position: fixed;
+      z-index: 40;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      border-top: 1px solid var(--border-default);
+      background: rgba(22, 26, 36, .98);
+      box-shadow: 0 -12px 32px rgba(0,0,0,.24);
+    }
+    .bottom-nav-inner { display: grid; width: min(100%, 640px); min-height: 72px; margin: 0 auto; padding: 4px 8px var(--safe-bottom); grid-template-columns: repeat(4, 1fr); }
+    .nav-item { display: flex; min-width: 64px; min-height: 56px; padding: 4px; align-items: center; justify-content: center; flex-direction: column; gap: 2px; color: var(--text-tertiary); font-size: 10px; line-height: 15px; font-weight: 600; }
+    .nav-item:hover { color: var(--text-primary); }
+    .nav-item[aria-current="page"] { color: var(--brand); }
+
+    .toast {
+      position: fixed;
+      z-index: 80;
+      left: 50%;
+      bottom: calc(88px + var(--safe-bottom));
+      display: flex;
+      min-height: 48px;
+      max-width: calc(100% - 32px);
+      padding: 12px 16px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      align-items: center;
+      gap: 8px;
+      background: var(--surface-elevated);
+      box-shadow: var(--shadow-elevated);
+      color: var(--text-primary);
+      font-size: 12px;
+      line-height: 18px;
+      font-weight: 600;
+      transform: translate(-50%, 32px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .toast.show { transform: translate(-50%, 0); opacity: 1; }
+    .toast svg { color: var(--success); }
+
+    .rule-topbar .topbar-inner { justify-content: flex-start; }
+    .rule-topbar h1 { margin: 0; font-size: 16px; line-height: 22px; font-weight: 700; }
+    .back-button { margin-left: -8px; border-color: transparent; background: transparent; }
+    .back-button:hover { background: var(--surface-primary); }
+    .rules-body { max-width: 960px; }
+    .rules-hero { padding: 24px 20px; }
+    .rules-hero h2 { max-width: 620px; margin: 0; font-size: 32px; line-height: 40px; font-weight: 800; letter-spacing: -1px; }
+    .rules-hero h2 span { color: var(--brand); }
+    .rules-hero p { margin: 12px 0 0; color: var(--text-secondary); }
+    .rules-rewards { display: grid; margin-top: 24px; gap: 8px; }
+    .rules-reward { display: flex; min-height: 56px; padding: 8px 16px; border: 1px solid var(--border-default); border-radius: var(--radius-md); align-items: center; justify-content: space-between; background: var(--surface-secondary); }
+    .rules-reward span { color: var(--text-secondary); font-size: 10px; line-height: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
+    .rules-reward strong { font-size: 18px; line-height: 24px; font-weight: 800; font-variant-numeric: tabular-nums; }
+    .rules-reward:first-child { border-color: rgba(204,255,0,.48); background: var(--brand-subtle); }
+    .rules-reward:first-child strong { color: var(--brand); }
+    .rules-section { margin-top: 16px; padding: 20px; }
+    .rules-section .section-kicker { color: var(--brand); }
+    .rules-section h2 { margin: 0; font-size: 20px; line-height: 28px; font-weight: 700; }
+    .rules-list { margin: 16px 0 0; padding: 0; list-style: none; }
+    .rules-list li { position: relative; padding-left: 20px; color: var(--text-secondary); font-size: 12px; line-height: 20px; }
+    .rules-list li + li { margin-top: 8px; }
+    .rules-list li::before { position: absolute; content: ""; left: 0; top: 7px; width: 8px; height: 8px; border-radius: var(--radius-full); background: var(--brand); }
+    .reward-table-wrap { margin-top: 16px; overflow-x: auto; border: 1px solid var(--border-default); border-radius: var(--radius-md); }
+    .reward-table { width: 100%; min-width: 600px; border-collapse: collapse; text-align: left; }
+    .reward-table th { padding: 12px 16px; background: var(--surface-secondary); color: var(--text-secondary); font-size: 10px; line-height: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
+    .reward-table td { padding: 16px; border-top: 1px solid var(--border-default); color: var(--text-secondary); font-size: 12px; line-height: 18px; }
+    .reward-table td:first-child { color: var(--text-primary); font-weight: 700; }
+    .reward-table td:nth-child(2) { color: var(--brand); font-weight: 800; font-variant-numeric: tabular-nums; }
+    .table-note { margin: 12px 0 0; color: var(--text-secondary); font-size: 12px; line-height: 18px; }
+    .table-note strong { color: var(--text-primary); }
+    .timeline { display: grid; margin-top: 16px; gap: 8px; }
+    .timeline-item { display: grid; padding: 16px; border: 1px solid var(--border-default); border-radius: var(--radius-md); background: var(--surface-secondary); gap: 4px; }
+    .timeline-label { color: var(--brand); font-size: 10px; line-height: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; }
+    .timeline-date { font-size: 14px; line-height: 20px; font-weight: 700; }
+    .timeline-desc { color: var(--text-secondary); font-size: 12px; line-height: 18px; }
+    .timezone { margin: 12px 0 0; color: var(--text-tertiary); font-size: 10px; line-height: 15px; }
+    .rule-footer { padding: 24px 20px; background: var(--brand-subtle); }
+    .rule-footer h2 { margin: 0; font-size: 20px; line-height: 28px; font-weight: 700; }
+    .rule-footer .rules-list li { color: #cbd4b2; }
+    .rule-footer .outline-button { width: 100%; margin-top: 20px; }
+
+    @media (min-width: 700px) {
+      .page-body { padding: 32px 24px 72px; }
+      .topbar-inner { padding: 0 24px; }
+      .hero-copy { padding: 40px 440px 40px 32px; min-height: 280px; }
+      .hero-art::after { background: linear-gradient(to right, rgba(22, 26, 36, .98), rgba(22, 26, 36, .94) 54%, rgba(22, 26, 36, .5) 82%, rgba(22, 26, 36, .28)); }
+      .hero-product-a { right: 248px; bottom: -52px; left: auto; width: 196px; height: 208px; }
+      .hero-product-b { right: 112px; bottom: -64px; left: auto; width: 208px; height: 224px; }
+      .hero-product-c { right: -20px; bottom: -48px; width: 208px; height: 216px; }
+      .desktop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .prize-card, .progress-card { height: 100%; }
+      .video-strip { margin: 0; padding: 0 0 8px; grid-auto-columns: minmax(260px, 1fr); }
+      .product-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+      .filter-row { margin: 0 0 16px; padding: 0 0 4px; }
+      .skeleton-grid { grid-template-columns: repeat(3, 1fr); }
+      .rules-hero { padding: 32px; }
+      .rules-rewards { grid-template-columns: repeat(3, 1fr); }
+      .rules-section { padding: 24px; }
+      .timeline-item { grid-template-columns: 160px 1fr; gap: 16px; }
+      .timeline-desc { grid-column: 2; }
+      .bottom-nav { position: sticky; top: 64px; bottom: auto; margin-top: 0; border-top: 0; border-bottom: 1px solid var(--border-default); box-shadow: none; }
+      .bottom-nav-inner { min-height: 56px; padding: 0 24px; }
+      .nav-item { min-height: 56px; flex-direction: row; gap: 8px; font-size: 12px; line-height: 16px; }
+      .toast { bottom: 32px; }
+    }
+
+    @media (min-width: 1000px) {
+      .hero-copy { padding-left: 40px; }
+      .hero h1 { font-size: 40px; line-height: 48px; }
+      .main-summary { grid-template-columns: .92fr 1.08fr; }
+      .video-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-flow: initial; }
+      .product-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .skeleton-grid { grid-template-columns: repeat(4, 1fr); }
+      .rules-hero { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: end; }
+      .rules-rewards { margin-top: 0; grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="app-shell">
+    <section class="page" id="campaign-page" aria-label="Campaign page">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <a class="brand-lockup" href="#home" aria-label="Hitfinds campaign home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span class="brand-word">Hit<span>finds</span></span>
+          </a>
+          <div class="topbar-meta">
+            <span class="live-pill"><span class="live-dot" aria-hidden="true"></span>Official event</span>
+          </div>
+        </div>
+      </header>
+
+      <nav class="bottom-nav" aria-label="Campaign navigation">
+        <div class="bottom-nav-inner">
+          <a class="nav-item" href="#home" data-nav="home" aria-current="page">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5H15v-6H9v6H4.5A1.5 1.5 0 0 1 3 19.5v-9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            Home
+          </a>
+          <a class="nav-item" href="#videos" data-nav="videos">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="m10 9 5 3-5 3V9Z" fill="currentColor"/></svg>
+            Videos
+          </a>
+          <a class="nav-item" href="#products" data-nav="products">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16l-1 13H5L4 8Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 10V6a4 4 0 0 1 8 0v4" stroke="currentColor" stroke-width="1.8"/></svg>
+            Products
+          </a>
+          <a class="nav-item" href="#my-rank" data-nav="my-rank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 21V10H3v11h5Zm13 0V3h-5v18h5Zm-9 0V6h-2v15h2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            My rank
+          </a>
+        </div>
+      </nav>
+
+      <main class="page-body content-wrap" id="main-content">
+        <section class="hero" id="home" aria-labelledby="campaign-title">
+          <div class="hero-copy">
+            <h1 id="campaign-title">Back-to-school <em>Campaign</em></h1>
+            <p class="hero-subtitle">Win up to $10,000 in cash rewards by ranking in GMV from featured product orders.</p>
+            <div class="campaign-window">
+              <span class="campaign-date">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 3v4m8-4v4M3 10h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                Aug 13–23, 2026 · PT
+              </span>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="art-grid"></div>
+            <div class="hero-product hero-product-a">
+              <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=320&amp;q=82" alt="">
+            </div>
+            <div class="hero-product hero-product-b">
+              <img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&amp;fit=crop&amp;w=320&amp;q=82" alt="">
+            </div>
+            <div class="hero-product hero-product-c">
+              <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=320&amp;q=82" alt="">
+            </div>
+          </div>
+        </section>
+
+        <div class="desktop-grid main-summary section">
+          <section class="card prize-card" aria-labelledby="prize-title">
+            <div class="podium-header">
+              <h2 id="prize-title">Cash rewards</h2>
+              <a class="podium-details" href="#rules" aria-label="View campaign reward details">View details
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 18 6-6-6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+            <div class="podium" role="list" aria-label="Top three cash rewards">
+              <div class="podium-place podium-place-1" role="listitem" aria-label="First place, 10,000 dollars">
+                <svg class="podium-crown" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m3 7 4 4 5-7 5 7 4-4-2 11H5L3 7Z" fill="currentColor"/><path d="M5 21h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                <span class="podium-medal">1</span><span class="podium-label">1st place</span><strong class="podium-amount">$10,000</strong>
+              </div>
+              <div class="podium-place podium-place-2" role="listitem" aria-label="Second place, 5,000 dollars">
+                <span class="podium-medal">2</span><span class="podium-label">2nd place</span><strong class="podium-amount">$5,000</strong>
+              </div>
+              <div class="podium-place podium-place-3" role="listitem" aria-label="Third place, 3,000 dollars">
+                <span class="podium-medal">3</span><span class="podium-label">3rd place</span><strong class="podium-amount">$3,000</strong>
+              </div>
+            </div>
+          </section>
+
+          <section class="card progress-card" id="my-rank" aria-labelledby="rank-title">
+            <div class="progress-head">
+              <div><span class="section-kicker">Your live performance</span><h2 id="rank-title">You're in the race</h2></div>
+              <span class="status-badge">↑ 6 places</span>
+            </div>
+            <div class="metric-grid">
+              <div class="metric"><span class="metric-label">Current rank</span><strong class="metric-value brand">#18</strong><span class="metric-trend">↑ from #24</span></div>
+              <div class="metric"><span class="metric-label">Eligible GMV</span><strong class="metric-value">$42.8K</strong><span class="metric-trend">↑ 18.4%</span></div>
+              <div class="metric"><span class="metric-label">Units sold</span><strong class="metric-value">318</strong><span class="metric-trend">↑ 47 today</span></div>
+            </div>
+            <div class="progress-track" aria-label="71 percent progress to the next rank"><div class="progress-fill"></div></div>
+            <div class="progress-copy"><span><strong>$6.4K</strong> to pass rank #17</span><span>Updated 8 min ago</span></div>
+            <button class="primary-button" type="button" data-scroll-products>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 20h16M6 17l4-5 3 2 5-8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 6h3v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+              Find winning products
+            </button>
+          </section>
+        </div>
+
+        <section class="section" id="videos" aria-labelledby="videos-title">
+          <div class="section-header">
+            <div><h2 id="videos-title">Breakout videos</h2></div>
+            <a class="text-link" href="#videos">See all <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="video-strip">
+            <article class="video-card">
+              <div class="video-media">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=700&q=84" alt="Creator presenting a campus backpack" loading="lazy">
+                <span class="badge video-badge">Viral · ↑ 218%</span>
+                <button class="play-button" type="button" aria-label="Play Maya Carter's dorm backpack video"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg></button>
+                <div class="creator"><img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=96&q=84" alt=""><span class="creator-name">@mayamakesmoves</span></div>
+              </div>
+              <div class="video-body"><h3 class="video-title">3 dorm essentials I wish I bought sooner</h3><div class="video-metrics"><div class="video-stat"><span>Video GMV</span><strong>$128.4K</strong></div><div class="video-stat"><span>Views</span><strong>2.8M</strong></div><div class="video-stat"><span>CVR</span><strong>7.4%</strong></div></div></div>
+            </article>
+            <article class="video-card">
+              <div class="video-media">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=84" alt="Creator reviewing a study setup" loading="lazy">
+                <span class="badge video-badge">Top converter · 9.2%</span>
+                <button class="play-button" type="button" aria-label="Play Jordan Lee's desk reset video"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg></button>
+                <div class="creator"><img class="avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=96&q=84" alt=""><span class="creator-name">@jordanfindsit</span></div>
+              </div>
+              <div class="video-body"><h3 class="video-title">Under-$30 desk reset for a better semester</h3><div class="video-metrics"><div class="video-stat"><span>Video GMV</span><strong>$96.7K</strong></div><div class="video-stat"><span>Views</span><strong>1.9M</strong></div><div class="video-stat"><span>CVR</span><strong>9.2%</strong></div></div></div>
+            </article>
+            <article class="video-card">
+              <div class="video-media">
+                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=700&q=84" alt="Creator showing lunch and hydration picks" loading="lazy">
+                <span class="badge video-badge">Fast riser · ↑ 164%</span>
+                <button class="play-button" type="button" aria-label="Play Alex Morgan's campus picks video"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m9 7 8 5-8 5V7Z"/></svg></button>
+                <div class="creator"><img class="avatar" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=96&q=84" alt=""><span class="creator-name">@alexoncampus</span></div>
+              </div>
+              <div class="video-body"><h3 class="video-title">Pack my campus bag with me in 20 seconds</h3><div class="video-metrics"><div class="video-stat"><span>Video GMV</span><strong>$74.2K</strong></div><div class="video-stat"><span>Views</span><strong>1.4M</strong></div><div class="video-stat"><span>CVR</span><strong>6.8%</strong></div></div></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="products" aria-labelledby="products-title">
+          <div class="section-header">
+            <div><h2 id="products-title">Back-to-school bestsellers</h2></div>
+          </div>
+          <div class="filter-row" role="tablist" aria-label="Product categories">
+            <button class="chip" type="button" role="tab" aria-selected="true" data-filter="all">All picks</button>
+            <button class="chip" type="button" role="tab" aria-selected="false" data-filter="dorm">Dorm essentials</button>
+            <button class="chip" type="button" role="tab" aria-selected="false" data-filter="study">Study setup</button>
+            <button class="chip" type="button" role="tab" aria-selected="false" data-filter="style">Campus style</button>
+            <button class="chip" type="button" role="tab" aria-selected="false" data-filter="lunch">Lunch &amp; hydration</button>
+          </div>
+          <div id="products-live" aria-live="polite">
+            <div class="product-grid">
+              <article class="product-card" data-category="style">
+                <div class="product-media"><span class="badge badge-viral">Viral · ↑ 42%</span><button class="icon-button bookmark" type="button" aria-label="Save commuter backpack" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3-6 3V4.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=600&q=84" alt="Black commuter backpack" loading="lazy"></div>
+                <div class="product-body"><h3 class="product-title">Water-Resistant Commuter Backpack</h3><div class="price-row"><strong class="price">$29.99</strong><span class="sold">38.2K sold</span></div><div class="commission"><span>Creator commission</span><strong>20% · $6.00</strong></div><button class="secondary-button product-action" type="button" data-add-product>Add to showcase</button></div>
+              </article>
+              <article class="product-card" data-category="lunch">
+                <div class="product-media"><span class="badge badge-new">New bestseller</span><button class="icon-button bookmark" type="button" aria-label="Save insulated water bottle" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3-6 3V4.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><img src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=84" alt="Insulated green water bottle" loading="lazy"></div>
+                <div class="product-body"><h3 class="product-title">32 oz Leakproof Insulated Bottle</h3><div class="price-row"><strong class="price">$24.50</strong><span class="sold">26.8K sold</span></div><div class="commission"><span>Creator commission</span><strong>25% · $6.13</strong></div><button class="secondary-button product-action" type="button" data-add-product>Add to showcase</button></div>
+              </article>
+              <article class="product-card" data-category="study">
+                <div class="product-media"><span class="badge badge-viral">Viral · ↑ 31%</span><button class="icon-button bookmark" type="button" aria-label="Save noise cancelling headphones" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3-6 3V4.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=84" alt="Over-ear study headphones" loading="lazy"></div>
+                <div class="product-body"><h3 class="product-title">FocusMode Wireless Headphones</h3><div class="price-row"><strong class="price">$38.99</strong><span class="sold">19.4K sold</span></div><div class="commission"><span>Creator commission</span><strong>18% · $7.02</strong></div><button class="secondary-button product-action" type="button" data-add-product>Add to showcase</button></div>
+              </article>
+              <article class="product-card" data-category="study">
+                <div class="product-media"><span class="badge badge-new">High commission</span><button class="icon-button bookmark" type="button" aria-label="Save foldable laptop stand" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-3-6 3V4.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></button><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=84" alt="Laptop on a compact study desk" loading="lazy"></div>
+                <div class="product-body"><h3 class="product-title">Adjustable Fold-Flat Laptop Stand</h3><div class="price-row"><strong class="price">$18.80</strong><span class="sold">15.7K sold</span></div><div class="commission"><span>Creator commission</span><strong>30% · $5.64</strong></div><button class="secondary-button product-action" type="button" data-add-product>Add to showcase</button></div>
+              </article>
+            </div>
+          </div>
+          <div id="products-loading" hidden>
+            <div class="skeleton-grid" aria-label="Loading products">
+              <div class="skeleton"><div class="skeleton-media"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>
+              <div class="skeleton"><div class="skeleton-media"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>
+              <div class="skeleton"><div class="skeleton-media"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>
+              <div class="skeleton"><div class="skeleton-media"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>
+            </div>
+          </div>
+          <div id="products-empty" hidden>
+            <div class="state-card"><div class="state-card-inner"><div class="state-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16l-1 13H5L4 8Z" stroke="currentColor" stroke-width="1.8"/><path d="M9 12h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><h3>No products match this filter</h3><p>Try another category or check back as new back-to-school winners break out.</p><button class="secondary-button" type="button" data-reset-state>Show all picks</button></div></div>
+          </div>
+          <div id="products-error" hidden>
+            <div class="state-card"><div class="state-card-inner"><div class="state-icon error"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 8v5m0 3h.01M10.3 3.8 2.6 17.2A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.8L13.7 3.8a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Product data couldn't load</h3><p>Your connection may be unstable. Retry to refresh the latest GMV and commission data.</p><button class="secondary-button" type="button" data-reset-state>Retry now</button></div></div>
+          </div>
+        </section>
+
+        <section class="section card tips-card" aria-labelledby="tip-title">
+          <div class="tips-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18h6m-5 3h4m3-8.5a7 7 0 1 0-10 0c1.2.9 2 2.1 2 3.5h6c0-1.4.8-2.6 2-3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div><h2 id="tip-title">Creator move of the day</h2><p>Lead with a real campus problem in the first 2 seconds, show the product in use, then name the deal before your call to action.</p></div>
+        </section>
+      </main>
+    </section>
+
+    <section class="page" id="rules-page" aria-label="Campaign rules" hidden>
+      <header class="topbar rule-topbar">
+        <div class="topbar-inner">
+          <a class="icon-button back-button" href="#home" aria-label="Back to campaign"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m15 18-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <h1>Official campaign rules</h1>
+        </div>
+      </header>
+      <main class="page-body content-wrap rules-body" id="rules-main">
+        <section class="card rules-hero" aria-labelledby="rules-title">
+          <div><span class="eyebrow">Official campaign rules</span><h2 id="rules-title">Back-to-School GMV <span>Ranking</span></h2><p>Campaign period: August 13, 2026 – August 23, 2026 (Pacific Time).</p></div>
+          <div class="rules-rewards" aria-label="Top three rewards">
+            <div class="rules-reward"><span>Rank #1</span><strong>$10,000</strong></div>
+            <div class="rules-reward"><span>Rank #2</span><strong>$5,000</strong></div>
+            <div class="rules-reward"><span>Rank #3</span><strong>$3,000</strong></div>
+          </div>
+        </section>
+
+        <section class="card rules-section" aria-labelledby="participate-title">
+          <span class="section-kicker">Campaign instructions</span><h2 id="participate-title">Who can participate</h2>
+          <ul class="rules-list"><li>This campaign is exclusively for eligible U.S. TikTok Shop creators who have an active product showcase.</li><li>Creators must remain in good standing and comply with TikTok Shop policies throughout the campaign.</li><li>Hitfinds reserves the right of final interpretation of these campaign terms and conditions.</li></ul>
+        </section>
+
+        <section class="card rules-section" aria-labelledby="reward-title">
+          <span class="section-kicker">Ranking rewards</span><h2 id="reward-title">Reward table</h2>
+          <div class="reward-table-wrap">
+            <table class="reward-table">
+              <thead><tr><th scope="col">Rank</th><th scope="col">Cash reward</th><th scope="col">Minimum requirement</th></tr></thead>
+              <tbody><tr><td>Rank #1</td><td>$10,000</td><td>Eligible GMV ≥ $500,000</td></tr><tr><td>Rank #2</td><td>$5,000</td><td>Campaign ranking eligibility</td></tr><tr><td>Rank #3</td><td>$3,000</td><td>Campaign ranking eligibility</td></tr></tbody>
+            </table>
+          </div>
+          <p class="table-note"><strong>Tie-breaker:</strong> If eligible GMV is the same, the creator with more eligible units sold will receive the higher rank and cash reward.</p>
+        </section>
+
+        <section class="card rules-section" aria-labelledby="timeline-title">
+          <span class="section-kicker">Time rules</span><h2 id="timeline-title">Campaign timeline</h2>
+          <div class="timeline">
+            <div class="timeline-item"><span class="timeline-label">Activity period</span><span class="timeline-date">August 13–23, 2026</span><span class="timeline-desc">All eligible campaign activity is measured during this window.</span></div>
+            <div class="timeline-item"><span class="timeline-label">Video posting window</span><span class="timeline-date">August 13–23, 2026</span><span class="timeline-desc">Videos must be published and remain public during the activity period.</span></div>
+            <div class="timeline-item"><span class="timeline-label">GMV calculation</span><span class="timeline-date">Through August 23, 2026</span><span class="timeline-desc">Eligible GMV is calculated from qualifying campaign orders through 11:59 PM PT.</span></div>
+            <div class="timeline-item"><span class="timeline-label">Winner announcement</span><span class="timeline-date">September 20, 2026</span><span class="timeline-desc">Winners will be announced after campaign data and eligibility review.</span></div>
+            <div class="timeline-item"><span class="timeline-label">Reward payout</span><span class="timeline-date">September 20, 2026</span><span class="timeline-desc">Cash rewards will be paid after final campaign confirmation.</span></div>
+          </div>
+          <p class="timezone">Time zone: UTC/GMT −08:00 (PT). Daylight-saving adjustments may apply.</p>
+        </section>
+
+        <section class="card rule-footer" aria-labelledby="publishing-title">
+          <span class="section-kicker">Notes</span><h2 id="publishing-title">Before publishing</h2>
+          <ul class="rules-list"><li>Ranking performance is based on eligible campaign GMV recorded during the campaign period.</li><li>Campaign videos and showcased products must follow TikTok Shop platform requirements and applicable disclosure rules.</li><li>Cancelled, refunded, fraudulent, or otherwise ineligible orders are excluded from GMV.</li><li>Reward eligibility may be reviewed before winner announcement and payout.</li></ul>
+          <a class="outline-button" href="#home">Back to campaign</a>
+        </section>
+      </main>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span id="toast-message">Added to your showcase</span>
+  </div>
+
+  <script>
+    const campaignPage = document.querySelector('#campaign-page');
+    const rulesPage = document.querySelector('#rules-page');
+    const toast = document.querySelector('#toast');
+    const toastMessage = document.querySelector('#toast-message');
+    let toastTimer;
+
+    function showToast(message) {
+      toastMessage.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+
+    function routePage() {
+      const isRules = location.hash === '#rules';
+      campaignPage.hidden = isRules;
+      rulesPage.hidden = !isRules;
+      document.title = isRules ? 'Campaign Rules — Hitfinds' : 'Hitfinds — Back-to-School GMV Ranking';
+      if (isRules) {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        requestAnimationFrame(() => document.querySelector('.back-button').focus({ preventScroll: true }));
+      }
+    }
+
+    window.addEventListener('hashchange', routePage);
+    routePage();
+
+    document.querySelector('[data-scroll-products]').addEventListener('click', () => {
+      document.querySelector('#products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.nav-item').forEach(link => link.removeAttribute('aria-current'));
+        item.setAttribute('aria-current', 'page');
+      });
+    });
+
+    document.querySelectorAll('[data-filter]').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('[data-filter]').forEach(item => item.setAttribute('aria-selected', 'false'));
+        chip.setAttribute('aria-selected', 'true');
+        const filter = chip.dataset.filter;
+        let visible = 0;
+        document.querySelectorAll('.product-card').forEach(card => {
+          const shouldShow = filter === 'all' || card.dataset.category === filter;
+          card.hidden = !shouldShow;
+          if (shouldShow) visible += 1;
+        });
+        if (!visible) setProductState('empty');
+      });
+    });
+
+    function setProductState(state) {
+      const ids = ['default', 'loading', 'empty', 'error'];
+      ids.forEach(name => {
+        const el = document.querySelector(name === 'default' ? '#products-live' : `#products-${name}`);
+        el.hidden = name !== state;
+      });
+      document.querySelectorAll('[data-state]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.state === state)));
+    }
+
+    document.querySelectorAll('[data-state]').forEach(button => button.addEventListener('click', () => setProductState(button.dataset.state)));
+    document.querySelectorAll('[data-reset-state]').forEach(button => button.addEventListener('click', () => {
+      document.querySelectorAll('.product-card').forEach(card => card.hidden = false);
+      document.querySelectorAll('[data-filter]').forEach(chip => chip.setAttribute('aria-selected', String(chip.dataset.filter === 'all')));
+      setProductState('default');
+    }));
+
+    document.querySelectorAll('.bookmark').forEach(button => {
+      button.addEventListener('click', () => {
+        const pressed = button.getAttribute('aria-pressed') === 'true';
+        button.setAttribute('aria-pressed', String(!pressed));
+        showToast(pressed ? 'Removed from saved products' : 'Saved to your product list');
+      });
+    });
+
+    document.querySelectorAll('[data-add-product]').forEach(button => {
+      button.addEventListener('click', () => {
+        button.disabled = true;
+        const original = button.textContent;
+        button.textContent = 'Adding…';
+        setTimeout(() => {
+          button.textContent = 'Added to showcase';
+          showToast('Product added to your showcase');
+          setTimeout(() => { button.disabled = false; button.textContent = original; }, 1600);
+        }, 700);
+      });
+    });
+
+    document.querySelectorAll('.play-button').forEach(button => button.addEventListener('click', () => showToast('Video preview opened')));
+  </script>
+</body>
+</html>
